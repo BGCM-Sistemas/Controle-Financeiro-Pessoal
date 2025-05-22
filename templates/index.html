@@ -8,19 +8,21 @@
 </head>
 <body>
     <header class="d-flex between">
-        <div>
-            <img src="" alt="logo da Gestor Pessoal" class="logo">
-            <h1>GESTOR</h1>
-            <h2>-PESSOAL-</h2>
+        <div class="d-flex">
+            <img src="../static/img/logo-img.png" alt="logo da Gestor Pessoal" class="logo">
+            <div>
+                <h1 class="gestor">GESTOR</h1>
+                <h1 class="pessoal">-PESSOAL-</h1>
+            </div>
         </div>
         <nav class="d-flex between">
-            <a href="index.html">Home</a>
+            <a href="{{ url_for('index') }}">Home</a>
             <a href="">Carteira</a>
-            <a href="cadastro.html">Login</a>
+            <a href="{{ url_for('cadastro') }}">Login</a>
         </nav>
     </header>
     <main>
-        <section class="banner d-flex around">
+        <section class="banner d-flex around container">
             <p>Entenda seus gastos com a <span class="font-destaque">Gestor Pessoal</span> e saiba reservar seu dinheiro conosco</p>
             <div>
                 <form action="calculo-reserva" class="">
@@ -30,17 +32,9 @@
                     <input type="number" name="prazo" id="prazo">
                     <button type="submit">Calcular</button>
                 </form>
-                <div>
-                    {{% if calculo-reserva %}}
-                        <p>Reserva total necessária</p>
-                        <p class="resultado-reserva">{reserva-total}</p>
-                        <p>Reserva mensal</p>
-                        <p class="resultado-reserva">{reserva-mensal}/mês</p>
-                    {{% endif %}}
-                </div>
             </div>
         </section>
-        <section class="servicos">
+        <section class="servicos container">
             <h2 class="titulo">Serviços</h2>
             <div class="d-flex evenly">
                 <div class="servico">
@@ -58,11 +52,20 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer class="d-flex around">
         <div>
-            <img src="" alt="logo da Gestor Pessoal" class="logo">
-            <h1>GESTOR</h1>
-            <h2>-PESSOAL-</h2>
+            <div class="d-flex footer-logo">
+                <img src="../static/img/logo-img.png" alt="logo da Gestor Pessoal" class="logo">
+                <div>
+                    <h1 class="gestor">GESTOR</h1>
+                    <h1 class="pessoal">-PESSOAL-</h1>
+                </div>
+            </div>
+            <div class="redes">
+                <img src="static/img/instagram-logo-img.png" alt="" class="footer-icon">
+                <img src="static/img/facebook-logo-img.png" alt="Logo facebook" class="footer-icon">
+                <img src="static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
+            </div>
         </div>
         <div>
             <address>
@@ -70,11 +73,6 @@
                 <p>Telefone: (18) 99694-9451</p>
                 <p>Avenida João Cernach, 2180 - Vila Troncoso, Birigui - SP, Brasil</p>
             </address>
-        </div>
-        <div>
-            <img src="static/img/instagram-logo-img.png" alt="" class="footer-icon">
-            <img src="static/img/f" alt="Logo facebook" class="footer-icon">
-            <img src="static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
         </div>
     </footer>
 </body>

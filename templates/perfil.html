@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
+
 <body>
     <header class="d-flex between">
         <div class="d-flex">
@@ -23,24 +25,28 @@
     </header>
     <main>
         <section class="container">
-            <form action="login" class="formulario" method="POST">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email">
-                <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha">
-                <button type="submit">Logar</button>
-            </form>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <section>
-                    <div class="flash-messages">
-                        {% for category, message in messages %}
-                            <div class="flash">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                </section>
-            {% endif %}
-            {% endwith %}
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>{{ nome }}</td>
+                    <td>{{ email }}</td>
+                    <td>
+                        <a class="botao pequeno" href="/editar_livro/{{ loop.index0 }}"><img src="./static/img/editar.png" alt="icone de editar" width="20px"></a>
+                    </td>
+                </tr>
+                {% with mensagens = get_flashed_messages() %}
+                {% if mensagens %}
+                <ul class="flash-messages">
+                    {% for msg in mensagens %}
+                    <li class="flash">{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                </table>
         </section>
     </main>
     <footer class="d-flex around">
@@ -67,4 +73,5 @@
         </div>
     </footer>
 </body>
+
 </html>
