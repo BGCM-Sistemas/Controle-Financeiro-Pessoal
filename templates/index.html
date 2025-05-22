@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor Pessoal</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header class="d-flex between">
+        <div>
+            <img src="" alt="logo da Gestor Pessoal" class="logo">
+            <h1>GESTOR</h1>
+            <h2>-PESSOAL-</h2>
+        </div>
+        <nav class="d-flex between">
+            <a href="index.html">Home</a>
+            <a href="">Carteira</a>
+            <a href="cadastro.html">Login</a>
+        </nav>
+    </header>
+    <main>
+        <section class="banner d-flex around">
+            <p>Entenda seus gastos com a <span class="font-destaque">Gestor Pessoal</span> e saiba reservar seu dinheiro conosco</p>
+            <div>
+                <form action="calculo-reserva" class="">
+                    <label for="cobertura">Meses de cobertura</label>
+                    <input type="number" name="cobertura" id="cobertura">
+                    <label for="prazo">Prazo</label>
+                    <input type="number" name="prazo" id="prazo">
+                    <button type="submit">Calcular</button>
+                </form>
+                <div>
+                    {{% if calculo-reserva %}}
+                        <p>Reserva total necessária</p>
+                        <p class="resultado-reserva">{reserva-total}</p>
+                        <p>Reserva mensal</p>
+                        <p class="resultado-reserva">{reserva-mensal}/mês</p>
+                    {{% endif %}}
+                </div>
+            </div>
+        </section>
+        <section class="servicos">
+            <h2 class="titulo">Serviços</h2>
+            <div class="d-flex evenly">
+                <div class="servico">
+                    <h3>Registro de transações</h3>
+                    <p>Calculo de saldo automático a partir de suas receitas e despesas, mostrando data, descrição e valor</p>
+                </div>
+                <div class="servico">
+                    <h3>Imposto de renda</h3>
+                    <p>Posição do último dia útil do ano, dividendos, juros sobre capital próprio (JCP), rendimentos, reembolsos recebidos e mais. Confira!</p>
+                </div>
+                <div class="servico">
+                    <h3>Calculo de reserva de emergência</h3>
+                    <p>Calculo de reserva de emergência automático a partir de suas despesas e quantos meses deseja cobrir. Mostrando quanto guardar por mês e quanto meses vão durar.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <img src="" alt="logo da Gestor Pessoal" class="logo">
+            <h1>GESTOR</h1>
+            <h2>-PESSOAL-</h2>
+        </div>
+        <div>
+            <address>
+                <p>E-mail: gestor.pessoal@gmail.com</p>
+                <p>Telefone: (18) 99694-9451</p>
+                <p>Avenida João Cernach, 2180 - Vila Troncoso, Birigui - SP, Brasil</p>
+            </address>
+        </div>
+        <div>
+            <img src="static/img/instagram-logo-img.png" alt="" class="footer-icon">
+            <img src="static/img/f" alt="Logo facebook" class="footer-icon">
+            <img src="static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
+        </div>
+    </footer>
+</body>
+</html>
