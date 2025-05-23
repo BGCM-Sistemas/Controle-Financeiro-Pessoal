@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <header class="d-flex between">
@@ -26,11 +26,11 @@
         <section class="container">
             <form action="cadastro" class="formulario" method="POST">
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nome" placeholder="Insira seu nome">
+                <input type="text" name="nome" id="nome" placeholder="Insira seu nome" required>
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Insira seu email">
+                <input type="email" name="email" id="email" placeholder="Insira seu email" required>
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" placeholder="Insira uma senha com até 8 digitos">
+                <input type="password" name="senha" id="senha" placeholder="Insira uma senha com até 8 digitos" required>
                 <button type="submit">Cadastrar</button>
                 <p>Já possui uma conta? O que está esperando? Faça <a href="{{ url_for('login') }}">login</a></p>
             </form>

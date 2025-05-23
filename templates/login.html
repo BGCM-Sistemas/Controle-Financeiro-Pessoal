@@ -26,9 +26,9 @@
         <section class="container">
             <form action="login" class="formulario" method="POST">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" placeholder="Informe seu email" required>
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha">
+                <input type="password" name="senha" id="senha" placeholder="Informe sua senha" required>
                 <button type="submit">Logar</button>
                 <p>Não tem uma conta ainda? Não perca seu dinheiro e <a href="{{ url_for('cadastro') }}">cadastre</a></p>
             </form>

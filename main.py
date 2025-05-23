@@ -135,7 +135,7 @@ def editar(codigo):
                     usuario['nome'] = request.form['nome']
                     usuario['email'] = request.form['email']
                     usuario['senha'] = request.form['senha']
-
+# senha forte
                 tem_maiuscula = False
                 tem_minuscula = False
                 tem_numero = False
@@ -178,6 +178,6 @@ def editar(codigo):
         return redirect(url_for('perfil'))
 
     return render_template('editar.html', usuario=usuario)
-    
+
 if __name__ == '__main__':
     app.run(debug=True)
