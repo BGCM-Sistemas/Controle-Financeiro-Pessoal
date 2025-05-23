@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor Pessoal</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <header class="d-flex between">
@@ -18,7 +18,7 @@
         <nav class="d-flex between">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="">Carteira</a>
-            <a href="{{ url_for('cadastro') }}">Login</a>
+            <a href="{{ url_for('login') }}">Login</a>
             <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
@@ -26,7 +26,7 @@
 
 
         {% if nome %}
-            <h1>Olá, {{ nome }}</h1>
+            <h1 class="saudacao">Olá, {{ nome }}</h1>
         {% endif %}
 
         <section class="banner d-flex around container">
@@ -59,7 +59,7 @@
             </div>
         </section>
     </main>
-    <footer class="d-flex around">
+    <footer class="d-flex between">
         <div>
             <div class="d-flex footer-logo">
                 <img src="../static/img/logo-img.png" alt="logo da Gestor Pessoal" class="logo">

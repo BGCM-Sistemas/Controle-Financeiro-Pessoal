@@ -20,13 +20,25 @@
         <nav class="d-flex between">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="">Carteira</a>
-            <a href="{{ url_for('cadastro') }}">Login</a>
+            <a href="{{ url_for('login') }}">Login</a>
             <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
     <main>
-        <section class="container">
+        <section class="container container-perfil">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <section>
+                <div class="login-menssagem d-flex center">
+                    {% for category, message in messages %}
+                    <div class="login">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+            {% endwith %}
             <div class="bg-perfil d-flex center">
+                
                 <table class="perfil">
                     <tr>
                         <th>Nome</th>
@@ -37,27 +49,14 @@
                         <td>{{ usuario.nome }}</td>
                         <td>{{ usuario.email }}</td>
                         <td>
-                            <a class="botao pequeno" href="{{ url_for('abrir_editar', codigo=usuario.codigo) }}">editar</a>
-
+                            <a class="botao pequeno" href="{{ url_for('abrir_editar', codigo=usuario.codigo) }}">Editar</a>
                         </td>
-
                     </tr>
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    <section>
-                        <div class="login-menssagem d-flex center">
-                            {% for category, message in messages %}
-                            <div class="login">{{ message }}</div>
-                            {% endfor %}
-                        </div>
-                    </section>
-                    {% endif %}
-                    {% endwith %}
                 </table>
             </div>
         </section>
     </main>
-    <footer class="d-flex around">
+    <footer class="d-flex between">
         <div>
             <div class="d-flex footer-logo">
                 <img src="../static/img/logo-img.png" alt="logo da Gestor Pessoal" class="logo">

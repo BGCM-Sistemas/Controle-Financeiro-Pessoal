@@ -5,23 +5,18 @@ from flask import Flask, render_template, request, redirect, flash, url_for
 app = Flask(__name__)
 app.secret_key = 'senhasupersecretacomçparahackeramericanoerussonaoconseguirinvadir'
 usuarios = []
-# usuarios = {
-# 'nome':[],
-# 'email':[],
-# 'senha':[],
-# 'logado': []
-# }
-INDICE = 0
 
-
+# rota da home
 @app.route('/')
 def index():
+    # aparecer o nome na home
     nome = ''
     if len(usuarios) > 0:
-        nome = usuarios["nome"]
-    return render_template('index.html',usuarios = usuarios, nome=nome)
+        for usuario in usuarios:
+            nome = usuario["nome"]
+    return render_template('index.html', nome=nome)
 
-
+# rota de cadastro
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
@@ -29,52 +24,54 @@ def cadastro():
         email = request.form['email']
         senha = request.form['senha']
         codigo = str(len(usuarios) +1)
-
+# validação reforçada da senha
         tem_maiuscula = False
         tem_minuscula = False
         tem_numero = False
         tem_especial = False
 
-        # for c in senha:
-        #     if c.isupper(): # se tem maiuscula
-        #         tem_maiuscula = True
-        #     elif c.islower(): #se tem minuscula
-        #         tem_minuscula = True
-        #     elif c.isdigit(): #se tem numero
-        #         tem_numero = True
-        #     elif not c.isalnum(): #se tem caracter especial
-        #         tem_especial = True
-        #
-        # if not tem_maiuscula:
-        #     flash('A senha deve ter pelo menos uma letra maiúscula!')
-        #     return render_template('cadastro.html')
-        #
-        # elif not tem_minuscula:
-        #     flash('A senha deve ter pelo menos uma letra minúscula!')
-        #     return render_template('cadastro.html')
-        #
-        # elif not tem_numero:
-        #     flash('A senha deve ter pelo menos um número!')
-        #     return render_template('cadastro.html')
-        #
-        # elif not tem_especial:
-        #     flash('A senha deve ter pelo menos um caractere especial!')
-        #     return render_template('cadastro.html')
-        #
-        # elif len(senha) < 8:
-        #     flash('A senha deve ter pelo menos 8 caracteres!')
-        #     return render_template('cadastro.html')
-        #
-        # elif not nome:
-        #     flash('Nome e sobrenome obrigatório')
+        for c in senha:
+            if c.isupper(): # se tem maiuscula
+                tem_maiuscula = True
+            elif c.islower(): #se tem minuscula
+                tem_minuscula = True
+            elif c.isdigit(): #se tem numero
+                tem_numero = True
+            elif not c.isalnum(): #se tem caracter especial
+                tem_especial = True
+        
+        if not tem_maiuscula:
+            flash('A senha deve ter pelo menos uma letra maiúscula!')
+            return render_template('cadastro.html')
+        
+        elif not tem_minuscula:
+            flash('A senha deve ter pelo menos uma letra minúscula!')
+            return render_template('cadastro.html')
+        
+        elif not tem_numero:
+            flash('A senha deve ter pelo menos um número!')
+            return render_template('cadastro.html')
+        
+        elif not tem_especial:
+            flash('A senha deve ter pelo menos um caractere especial!')
+            return render_template('cadastro.html')
+        
+        elif len(senha) < 8:
+            flash('A senha deve ter pelo menos 8 caracteres!')
+            return render_template('cadastro.html')
+        
+        elif not nome:
+            flash('Nome e sobrenome obrigatório')
+            return render_template('cadastro.html')
 
 
         #Verificar se email já existe
         for usuario in usuarios:
             if usuario['email'] == email:
                 flash("Este email já está cadastrado")
+                return render_template('cadastro.html')
 
-        
+        # cadastro do usuario
         usuario = {
             "nome": nome,
             "email": email,
@@ -84,15 +81,13 @@ def cadastro():
         }
         usuarios.append(usuario)
 
-        print(usuarios)
-
         return redirect(url_for('login'))
 
     else:
         return render_template('cadastro.html')
 
 
-
+# rota de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     
@@ -104,7 +99,6 @@ def login():
             if usuario['email'] == email:
                 if usuario['senha'] == senha:
                     usuario['logado'] = 1 # logado
-                    print(usuarios)
                     flash("Login realizado com sucesso")
                     return render_template('perfil.html', usuario=usuario)
 
@@ -114,6 +108,7 @@ def login():
 
     return render_template('login.html')
 
+# rota de perfil
 @app.route('/perfil')
 def perfil():
     for usuario in usuarios:
@@ -123,13 +118,14 @@ def perfil():
             return render_template('perfil.html', nome=nome, email=email, usuario=usuario)
     return render_template('login.html')
 
-
+# rota para abrir a edição
 @app.route('/abrir_editar/<codigo>')
 def abrir_editar(codigo):
     for usuario in usuarios:
         if usuario['codigo'] == codigo:
             return render_template('editar.html', usuario=usuario)
 
+# rota de editar
 @app.route('/editar/<codigo>', methods=['GET', 'POST'])
 def editar(codigo):
     if request.method == 'POST':
@@ -145,42 +141,43 @@ def editar(codigo):
                 tem_numero = False
                 tem_especial = False
 
-                # for c in usuario['senha']:
-                #     if c.isupper(): # se tem maiuscula
-                #         tem_maiuscula = True
-                #     elif c.islower(): #se tem minuscula
-                #         tem_minuscula = True
-                #     elif c.isdigit(): #se tem numero
-                #         tem_numero = True
-                #     elif not c.isalnum(): #se tem caracter especial
-                #         tem_especial = True
+                for c in usuario['senha']:
+                    if c.isupper(): # se tem maiuscula
+                        tem_maiuscula = True
+                    elif c.islower(): #se tem minuscula
+                        tem_minuscula = True
+                    elif c.isdigit(): #se tem numero
+                        tem_numero = True
+                    elif not c.isalnum(): #se tem caracter especial
+                        tem_especial = True
                 
-                # if not tem_maiuscula:
-                #     flash('A senha deve ter pelo menos uma letra maiúscula!')
-                #     return render_template('cadastro.html')
+                if not tem_maiuscula:
+                    flash('A senha deve ter pelo menos uma letra maiúscula!')
+                    return render_template('editar.html')
                 
-                # elif not tem_minuscula:
-                #     flash('A senha deve ter pelo menos uma letra minúscula!')
-                #     return render_template('cadastro.html')
+                elif not tem_minuscula:
+                    flash('A senha deve ter pelo menos uma letra minúscula!')
+                    return render_template('editar.html')
                 
-                # elif not tem_numero:
-                #     flash('A senha deve ter pelo menos um número!')
-                #     return render_template('cadastro.html')
+                elif not tem_numero:
+                    flash('A senha deve ter pelo menos um número!')
+                    return render_template('editar.html')
                 
-                # elif not tem_especial:
-                #     flash('A senha deve ter pelo menos um caractere especial!')
-                #     return render_template('cadastro.html')
+                elif not tem_especial:
+                    flash('A senha deve ter pelo menos um caractere especial!')
+                    return render_template('editar.html')
                 
-                # elif len(senha) < 8:
-                #     flash('A senha deve ter pelo menos 8 caracteres!')
-                #     return render_template('cadastro.html')
+                elif len(usuario['senha']) < 8:
+                    flash('A senha deve ter pelo menos 8 caracteres!')
+                    return render_template('editar.html')
                 
-                # elif not nome:
-                #     flash('Nome e sobrenome obrigatório')
+                elif not usuario['nome']:
+                    flash('Nome e sobrenome obrigatório')
+                    return render_template('editar.html')
 
         return redirect(url_for('perfil'))
 
     return render_template('editar.html', usuario=usuario)
-
+    
 if __name__ == '__main__':
     app.run(debug=True)

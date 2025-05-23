@@ -71,8 +71,14 @@ header>div{
     color: var(--cinza-escuro);
 }
 
+.saudacao{
+    background-color: var(--azul-medio);
+    color: white;
+    padding: 10px 10px 10px 3%;
+}
+
 nav{
-    width: 40%;
+    width: 50%;
 }
 
 header nav a{
@@ -184,10 +190,12 @@ header nav a:hover {
 footer{
     background-color: var(--azul-medio);
     color: white;
+    padding: 0 20px 0 20px;
 }
 
 .redes img{
-    width: 50px;
+    width: 75px;
+    padding-left: 20px;
 }
 
 .footer-logo{
@@ -239,6 +247,17 @@ footer{
     transition: var(--transicao);
 }
 
+.formulario p{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.formulario p a{
+    text-decoration: none;
+    color: var(--laranja);
+    font-weight: bolder;
+}
+
 .erro{
     display: inline-block;
     background-color: var(--laranja);
@@ -267,14 +286,21 @@ footer{
     text-align: center;
     box-shadow: 5px 5px 10px 1px var(--azul-mais-claro);
 }
+
 .perfil tr, .perfil td, .perfil th{
     border: 1px solid black;
     padding: 10px;
     background-color: var(--azul-mais-claro);
 }
 
-tr{
-    margin-left: 250px;
+.perfil a{
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.container-perfil{
+    min-height: calc(100vh - 290px);
 }
 
 .login{
