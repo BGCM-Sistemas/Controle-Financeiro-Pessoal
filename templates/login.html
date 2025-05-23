@@ -19,6 +19,7 @@
             <a href="{{ url_for('index') }}">Home</a>
             <a href="">Carteira</a>
             <a href="{{ url_for('cadastro') }}">Login</a>
+            <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
     <main>
@@ -33,9 +34,9 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <section>
-                    <div class="flash-messages">
+                    <div class="erro-menssagem d-flex center">
                         {% for category, message in messages %}
-                            <div class="flash">{{ message }}</div>
+                            <div class="erro">{{ message }}</div>
                         {% endfor %}
                     </div>
                 </section>

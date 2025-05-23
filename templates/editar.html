@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Editar usuário</title>
     <link rel="stylesheet" href="static/css/style.css">
 </head>
-
 <body>
     <header class="d-flex between">
         <div class="d-flex">
@@ -26,36 +24,30 @@
     </header>
     <main>
         <section class="container">
-            <div class="bg-perfil d-flex center">
-                <table class="perfil">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th class="oi"></th>
-                    </tr>
-                    <tr>
-                        <td>{{ usuario.nome }}</td>
-                        <td>{{ usuario.email }}</td>
-                        <td>
-                            <a class="botao pequeno" href="{{ url_for('abrir_editar', codigo=usuario.codigo) }}">editar</a>
-
-                        </td>
-
-                    </tr>
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    <section>
-                        <div class="login-menssagem d-flex center">
-                            {% for category, message in messages %}
-                            <div class="login">{{ message }}</div>
-                            {% endfor %}
-                        </div>
-                    </section>
-                    {% endif %}
-                    {% endwith %}
-                </table>
-            </div>
+            <form action="{{ url_for('editar', codigo=usuario.codigo) }}" class="formulario" method="POST">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" value="{{ usuario.nome }}">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="{{ usuario.email }}">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" value="{{ usuario.senha }}">
+                <button type="submit">Salvar</button>
+            </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <section>
+                    <div class="erro-menssagem d-flex center">
+                        {% for category, message in messages %}
+                            <div class="erro">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+            {% endwith %}
         </section>
+
+
+
     </main>
     <footer class="d-flex around">
         <div>
@@ -81,5 +73,4 @@
         </div>
     </footer>
 </body>
-
 </html>

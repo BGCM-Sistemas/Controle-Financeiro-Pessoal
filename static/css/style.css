@@ -13,6 +13,7 @@
     --laranja: #DB9534;
     --cinza-escuro: #C2C2C2;
     --cinza-claro: #e0e0e0;
+    --transicao: all 0.3s ease;
 }
 
 .d-flex{
@@ -37,6 +38,11 @@
 .container{
     background-color: var(--azul-mais-claro);
     padding: 10vh 0;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
 }
 
 header{
@@ -75,6 +81,14 @@ header nav a{
     border-radius: 10px;
     text-decoration: none;
     color: black;
+    transition: var(--transicao);
+}
+
+header nav a:hover {
+    background-color: var(--laranja);
+    color: white;
+    transform: translateY(-2px);
+    transition: var(--transicao);
 }
 
 .banner{
@@ -99,30 +113,42 @@ header nav a{
     background-color: white;
     color: black;
     border-radius: 20px;
-    padding: 10px;
+    padding: 20px;
     width: 25%;
 }
 
 .banner form label{
     display: block;
+    font-size: 1.05em;
 }
 
 .banner form input{
     display: block;
     width: 100%;
-    margin-bottom: 10px;
-    padding: 4px;
+    margin-bottom: 15px;
+    padding: 7px;
     border-radius: 10px;
     background-color: var(--cinza-claro);
     border: none;
+    font-size: 1.05em;
+    border: 2px solid var(--cinza-escuro);
 }
 
 .banner form button{
     width: 100%;
     background-color: var(--azul-claro);
-    padding: 3px;
+    padding: 7px;
     border: none;
     border-radius: 10px;
+    font-size: 1.05em;
+    transition: var(--transicao);
+}
+
+.banner form button:hover {
+    background-color: var(--azul-medio);
+    color: white;
+    transform: translate(0, -2px);
+    transition: var(--transicao);
 }
 
 .titulo{
@@ -142,6 +168,13 @@ header nav a{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.servico:hover {
+    transform: translateY(-10px);
+    box-shadow: 4px 10px 20px rgba(0, 0, 0, 0.4);
+    transition: var(--transicao);
 }
 
 .servico h3{
@@ -150,6 +183,7 @@ header nav a{
 
 footer{
     background-color: var(--azul-medio);
+    color: white;
 }
 
 .redes img{
@@ -164,7 +198,7 @@ footer{
     background-color: white;
     width: 60%;
     margin: auto;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
     padding: 20px;
 }
 
@@ -173,12 +207,18 @@ footer{
     display: block;
     margin: auto;
     margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1.05em;
+    border-radius: 10px;
+    border: 2px solid var(--cinza-escuro);
+    background-color: var(--cinza-claro);
 }
 
 .formulario label{
     display: block;
     margin: auto;
     width: 50%;
+    font-size: 1.05em;
 }
 
 .formulario button{
@@ -187,15 +227,63 @@ footer{
     display: block;
     margin: auto;
     border: none;
-    padding: 3px;
+    padding: 10px;
+    font-size: 1.05em;
+    border-radius: 10px;
+    transition: var(--transicao);
 }
 
-.flash{
-    display: inline_block;
+.formulario button:hover {
+    background-color: var(--azul-escuro);
+    color: white;
+    transition: var(--transicao);
+}
+
+.erro{
+    display: inline-block;
+    background-color: var(--laranja);
+    color: white;
+    width: 60%;
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.bg-perfil{
     background-color: white;
     width: 60%;
+    height: 20vh;
+    border: 2px solid var(--cinza-escuro);
+    border-radius: 10px;
     margin: auto;
-    border-radius: 0 0 10px 10px;
-    padding: 5px;
+}
+
+.perfil{
+    background-color: white;
+    width: 85%;
+    border-collapse: collapse;
+    margin: auto;
     text-align: center;
+    box-shadow: 5px 5px 10px 1px var(--azul-mais-claro);
+}
+.perfil tr, .perfil td, .perfil th{
+    border: 1px solid black;
+    padding: 10px;
+    background-color: var(--azul-mais-claro);
+}
+
+tr{
+    margin-left: 250px;
+}
+
+.login{
+    display: inline-block;
+    background-color: var(--azul-medio);
+    color: white;
+    width: 60%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1em;
+    margin-bottom: 10px;
 }
