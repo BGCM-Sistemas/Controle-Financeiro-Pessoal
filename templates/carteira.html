@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor Pessoal</title>
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
     <header class="d-flex between">
         <div class="d-flex">
@@ -23,39 +25,52 @@
         </nav>
     </header>
     <main>
-
-
-        {% if nome %}
-            <h1 class="saudacao">Olá, {{ nome }}</h1>
-        {% endif %}
-
-        <section class="banner d-flex around container">
-            <p>Entenda seus gastos com a <span>Gestor Pessoal</span> e saiba reservar seu dinheiro conosco</p>
-            <div>
-                <form action="calculo-reserva">
-                    <label for="cobertura">Meses de cobertura</label>
-                    <input type="number" name="cobertura" id="cobertura">
-                    <label for="prazo">Prazo</label>
-                    <input type="number" name="prazo" id="prazo">
-                    <button type="submit">Calcular</button>
-                </form>
+        <section class="container d-flex center column">
+            <div class="bg-tabela d-flex center column">
+                <div class="bg-adicionar">
+                    <a href="{{ url_for('adicionar_receita') }}" class="adicionar">Adicionar receita</a>
+                </div>
+                <table class="tabela">
+                    <tr>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                    {% for receita in receitas %}
+                        <tr>
+                            <td>{{ receita.valor }}</td>
+                            <td>{{ receita.descricao }}</td>
+                            <td>{{ receita.data }}</td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
-        </section>
-        <section class="servicos container">
-            <h2 class="titulo">Serviços</h2>
-            <div class="d-flex evenly">
-                <div class="servico">
-                    <h3>Registro de transações</h3>
-                    <p>Calculo de saldo automático a partir de suas receitas e despesas, mostrando data, descrição e valor</p>
+            <div class="bg-tabela d-flex center column">
+                <div class="bg-adicionar">
+                    <a href="{{ url_for('adicionar_despesa') }}" class="adicionar">Adicionar despesa</a>
                 </div>
-                <div class="servico">
-                    <h3>Imposto de renda</h3>
-                    <p>Posição do último dia útil do ano, dividendos, juros sobre capital próprio (JCP), rendimentos, reembolsos recebidos e mais. Confira!</p>
-                </div>
-                <div class="servico">
-                    <h3>Calculo de reserva de emergência</h3>
-                    <p>Calculo de reserva de emergência automático a partir de suas despesas e quantos meses deseja cobrir. Mostrando quanto guardar por mês e quanto meses vão durar.</p>
-                </div>
+                <table class="tabela">
+                    <tr>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                    {% for despesa in despesas %}
+                        <tr>
+                            <td>{{ despesa.valor }}</td>
+                            <td>{{ despesa.descricao }}</td>
+                            <td>{{ despesa.data }}</td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
         </section>
     </main>
@@ -83,4 +98,5 @@
         </div>
     </footer>
 </body>
+
 </html>

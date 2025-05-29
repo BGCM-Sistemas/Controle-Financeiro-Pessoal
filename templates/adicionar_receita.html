@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor Pessoal</title>
+    <title>Adicionar receita</title>
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
     <header class="d-flex between">
         <div class="d-flex">
@@ -23,40 +25,27 @@
         </nav>
     </header>
     <main>
-
-
-        {% if nome %}
-            <h1 class="saudacao">Olá, {{ nome }}</h1>
-        {% endif %}
-
-        <section class="banner d-flex around container">
-            <p>Entenda seus gastos com a <span>Gestor Pessoal</span> e saiba reservar seu dinheiro conosco</p>
-            <div>
-                <form action="calculo-reserva">
-                    <label for="cobertura">Meses de cobertura</label>
-                    <input type="number" name="cobertura" id="cobertura">
-                    <label for="prazo">Prazo</label>
-                    <input type="number" name="prazo" id="prazo">
-                    <button type="submit">Calcular</button>
-                </form>
-            </div>
-        </section>
-        <section class="servicos container">
-            <h2 class="titulo">Serviços</h2>
-            <div class="d-flex evenly">
-                <div class="servico">
-                    <h3>Registro de transações</h3>
-                    <p>Calculo de saldo automático a partir de suas receitas e despesas, mostrando data, descrição e valor</p>
+        <section class="container">
+            <form action="adicionar_receita" class="formulario" method="POST">
+                <label for="valor">Valor</label>
+                <input type="number" name="valor" id="valor" placeholder="Insira o valor da receita" required>
+                <label for="descricao">Descrição</label>
+                <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição da receita ex.: Salário" required>
+                <label for="data">Data</label>
+                <input type="date" name="data" id="data" required>
+                <button type="submit">Adicionar receita</button>
+            </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <section>
+                <div class="erro-menssagem d-flex center">
+                    {% for category, message in messages %}
+                    <div class="erro">{{ message }}</div>
+                    {% endfor %}
                 </div>
-                <div class="servico">
-                    <h3>Imposto de renda</h3>
-                    <p>Posição do último dia útil do ano, dividendos, juros sobre capital próprio (JCP), rendimentos, reembolsos recebidos e mais. Confira!</p>
-                </div>
-                <div class="servico">
-                    <h3>Calculo de reserva de emergência</h3>
-                    <p>Calculo de reserva de emergência automático a partir de suas despesas e quantos meses deseja cobrir. Mostrando quanto guardar por mês e quanto meses vão durar.</p>
-                </div>
-            </div>
+            </section>
+            {% endif %}
+            {% endwith %}
         </section>
     </main>
     <footer class="d-flex between">
@@ -83,4 +72,5 @@
         </div>
     </footer>
 </body>
+
 </html>

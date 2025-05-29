@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: arial;
+    font-family: 'roboto', arial;
 }
 
 :root{
@@ -37,12 +37,17 @@
 
 .container{
     background-color: var(--azul-mais-claro);
+    /* background-image: linear-gradient(to top, var(--azul-medio), var(--azul-mais-claro), var(--azul-medio)); */
     padding: 10vh 0;
 }
 
 .center{
     justify-content: center;
     align-items: center;
+}
+
+.column{
+    flex-direction: column;
 }
 
 header{
@@ -103,7 +108,7 @@ header nav a:hover {
     background-size: cover;
     background-position: center center;
     color: white;
-    height: 50vh;
+    height: 60vh;
 }
 
 .banner p{
@@ -112,7 +117,7 @@ header nav a:hover {
 }
 
 .banner p span{
-    color: var(--azul-claro);
+    color: var(--laranja);
 }
 
 .banner div{
@@ -148,10 +153,11 @@ header nav a:hover {
     border-radius: 10px;
     font-size: 1.05em;
     transition: var(--transicao);
+    color: white;
 }
 
 .banner form button:hover {
-    background-color: var(--azul-medio);
+    background-color: var(--laranja);
     color: white;
     transform: translateY(-2px);
     transition: var(--transicao);
@@ -239,10 +245,11 @@ footer{
     font-size: 1.05em;
     border-radius: 10px;
     transition: var(--transicao);
+    color: white;
 }
 
 .formulario button:hover {
-    background-color: var(--azul-escuro);
+    background-color: var(--laranja);
     color: white;
     transition: var(--transicao);
 }
@@ -269,31 +276,34 @@ footer{
     padding: 1em;
 }
 
-.bg-perfil{
+.bg-tabela{
     background-color: white;
     width: 60%;
-    height: 20vh;
+    min-height: 20vh;
     border: 2px solid var(--cinza-escuro);
     border-radius: 10px;
     margin: auto;
+    padding: 20px 0;
 }
 
-.perfil{
+.tabela{
     background-color: white;
     width: 85%;
     border-collapse: collapse;
-    margin: auto;
+    /* margin: auto; */
     text-align: center;
     box-shadow: 5px 5px 10px 1px var(--azul-mais-claro);
+    color: white;
+    font-weight: bold;
 }
 
-.perfil tr, .perfil td, .perfil th{
+.tabela tr, .tabela td, .tabela th{
     border: 1px solid black;
     padding: 10px;
     background-color: var(--azul-mais-claro);
 }
 
-.perfil a{
+.tabela a{
     color: white;
     font-weight: bolder;
     text-decoration: none;
@@ -303,13 +313,21 @@ footer{
     min-height: calc(100vh - 290px);
 }
 
-.login{
-    display: inline-block;
-    background-color: var(--azul-medio);
+.adicionar{
+    background-color: var(--azul-claro);
     color: white;
-    width: 60%;
-    text-align: center;
+    padding: 5px;
     border-radius: 10px;
-    padding: 1em;
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+.adicionar:hover{
+    background-color: var(--laranja);
+    transition: var(--transicao);
+}
+
+.bg-adicionar{
     margin-bottom: 10px;
+    width: 85%;
 }

@@ -19,31 +19,33 @@
         </div>
         <nav class="d-flex between">
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="">Carteira</a>
+            <a href="{{ url_for('carteira') }}">Carteira</a>
             <a href="{{ url_for('login') }}">Login</a>
             <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
     <main>
+        {% if nome %}
+            <h1 class="saudacao">Bem vindo, {{ nome }}</h1>
+        {% endif %}
         <section class="container container-perfil">
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             <section>
-                <div class="login-menssagem d-flex center">
+                <div class="erro-menssagem d-flex center">
                     {% for category, message in messages %}
-                    <div class="login">{{ message }}</div>
+                    <div class="erro">{{ message }}</div>
                     {% endfor %}
                 </div>
             </section>
             {% endif %}
             {% endwith %}
-            <div class="bg-perfil d-flex center">
-                
-                <table class="perfil">
+            <div class="bg-tabela d-flex center">
+                <table class="tabela">
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th class="oi"></th>
+                        <th></th>
                     </tr>
                     <tr>
                         <td>{{ usuario.nome }}</td>
