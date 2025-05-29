@@ -26,15 +26,16 @@
     </header>
     <main>
         <section class="container">
-            <form action="adicionar_despesa" class="formulario" method="POST">
+            <form action="{{ url_for('editar_despesa', codigo=despesa.codigo) }}" class="formulario" method="POST">
                 <label for="valor">Valor</label>
-                <input type="number" name="valor" id="valor" placeholder="Insira o valor da despesa" required>
+                <input type="number" name="valor" id="valor" value="{{ despesa.valor }}"
+                    placeholder="Insira o valor da despesa" required>
                 <label for="descricao">Descrição</label>
-                <input type="text" name="descricao" id="descricao"
-                    placeholder="Insira a descrição da despesa ex.: Compras" required>
+                <input type="text" name="descricao" id="descricao" value="{{ despesa.descricao }}"
+                    placeholder="Insira a descrição da despesa ex.: Mercado" required>
                 <label for="data">Data</label>
-                <input type="date" name="data" id="data" required>
-                <button type="submit">Adicionar despesa</button>
+                <input type="date" name="data" id="data" value="{{ despesa.data }}" required>
+                <button type="submit">Editar despesa</button>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

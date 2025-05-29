@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
-
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'senhasupersecretacomçparahackeramericanoerussonaoconseguirinvadir'
@@ -195,46 +194,138 @@ def carteira():
     # if len(usuarios) > 0:
     #     for usuario in usuarios:
     #         nome = usuario["nome"]
+    saldo = 0
+    receita_total = 0
+    despesa_total = 0
 
-    return render_template('carteira.html', receitas=receitas)
+    for receita in receitas:
+        saldo += int(receita['valor'])
+        receita_total += int(receita['valor'])
 
+    for despesa in despesas:
+        saldo -= int(despesa['valor'])
+        despesa_total -= int(despesa['valor'])
+    return render_template('carteira.html', receita_total=receita_total, despesa_total=despesa_total, saldo=saldo)
+
+@app.route('/lista_receitas')
+def lista_receitas():
+    return render_template('lista_receitas.html', receitas=receitas)
+
+
+@app.route('/lista_despesas')
+def lista_despesas():
+    return render_template('lista_despesas.html', despesas=despesas)
+
+# rota adicionar receita
 @app.route('/adicionar_receita', methods=['GET', 'POST'])
 def adicionar_receita():
     if request.method == 'POST':
         valor = request.form['valor']
         descricao = request.form['descricao']
         data = request.form['data']
-        codigo = str(len(usuarios) +1)
+        codigo = str(len(receitas) +1)
+        data_pre_formatada = datetime.strptime(data, '%Y-%m-%d')  # Converte string para datetime
+        data_formatada = data_pre_formatada.strftime('%d/%m/%Y')
         receita = {
             'valor': valor,
             'descricao': descricao,
-            'data': data,
+            'data': data_formatada,
             'codigo': codigo
         }
-        print(receita)
         receitas.append(receita)
-        print(receitas)
-        return redirect('/carteira')
+        flash('Receita cadastrada com sucesso')
+        return redirect('/lista_receitas')
     return render_template('adicionar_receita.html')
 
+
+
+# rota adicionar despesa
 @app.route('/adicionar_despesa', methods=['GET', 'POST'])
 def adicionar_despesa():
     if request.method == 'POST':
         valor = request.form['valor']
         descricao = request.form['descricao']
         data = request.form['data']
-        codigo = str(len(usuarios) +1)
+        codigo = str(len(despesas) +1)
+        data_pre_formatada = datetime.strptime(data, '%Y-%m-%d')  # Converte string para datetime
+        data_formatada = data_pre_formatada.strftime('%d/%m/%Y')
         despesa = {
             'valor': valor,
             'descricao': descricao,
-            'data': data,
+            'data': data_formatada,
             'codigo': codigo
         }
-        print(despesa)
-        print(despesas)
         despesas.append(despesa)
-        return redirect('/carteira')
+        flash('Despesa cadastrada com sucesso')
+        return redirect('/lista_despesas')
     return render_template('adicionar_despesa.html')
+
+# abrir a página de editar receita
+@app.route('/abrir_editar_receita/<codigo>')
+def abrir_editar_receita(codigo):
+    for receita in receitas:
+        if receita['codigo'] == codigo:
+            return render_template('editar_receita.html', receita=receita)
+
+# editar receita
+@app.route('/editar_receita/<codigo>', methods=['GET', 'POST'])
+def editar_receita(codigo):
+    if request.method == 'POST':
+        for receita in receitas:
+            if receita['codigo'] == codigo:
+                receita['valor'] = request.form['valor']
+                receita['descricao'] = request.form['descricao']
+                receita['data'] = request.form['data']
+        flash('Receita editada com sucesso')
+        return redirect(url_for('lista_receitas'))
+
+    return render_template('editar_receita.html', receita=receita)
+
+# abrir editar despesa
+@app.route('/abrir_editar_despesa/<codigo>')
+def abrir_editar_despesa(codigo):
+    for despesa in despesas:
+        if despesa['codigo'] == codigo:
+            return render_template('editar_despesa.html', despesa=despesa)
+
+# editar despesa
+@app.route('/editar_despesa/<codigo>', methods=['GET', 'POST'])
+def editar_despesa(codigo):
+    if request.method == 'POST':
+        for despesa in despesas:
+            if despesa['codigo'] == codigo:
+                despesa['valor'] = request.form['valor']
+                despesa['descricao'] = request.form['descricao']
+                despesa['data'] = request.form['data']
+        flash('Despesa editada com sucesso')
+        return redirect(url_for('lista_despesas'))
+
+    return render_template('editar_despesa.html', despesa=despesa)
+
+
+# rota excluir receita
+@app.route('/excluir_receita/<codigo>')
+def excluir_receita(codigo):
+    for i, receita in enumerate(receitas):
+        if receita['codigo'] == codigo:
+            del receitas[i]
+            flash('Receita excluída com sucesso!')
+            break
+    return redirect(url_for('lista_receitas'))
+
+
+# rota excluir despesa
+@app.route('/excluir_despesa/<codigo>')
+def excluir_despesa(codigo):
+    for i, despesa in enumerate(despesas):
+        if despesa['codigo'] == codigo:
+            del despesas[i]
+            flash('Despesa excluída com sucesso!')
+            break
+    return redirect(url_for('lista_despesas'))
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar receita</title>
+    <title>Gestor Pessoal</title>
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
@@ -25,28 +25,44 @@
         </nav>
     </header>
     <main>
-        <section class="container">
-            <form action="adicionar_despesa" class="formulario" method="POST">
-                <label for="valor">Valor</label>
-                <input type="number" name="valor" id="valor" placeholder="Insira o valor da despesa" required>
-                <label for="descricao">Descrição</label>
-                <input type="text" name="descricao" id="descricao"
-                    placeholder="Insira a descrição da despesa ex.: Compras" required>
-                <label for="data">Data</label>
-                <input type="date" name="data" id="data" required>
-                <button type="submit">Adicionar despesa</button>
-            </form>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            <section>
-                <div class="erro-menssagem d-flex center">
-                    {% for category, message in messages %}
-                    <div class="erro">{{ message }}</div>
-                    {% endfor %}
+        <section class="container d-flex center column">
+            <div class="bg-tabela d-flex center column">
+                <div class="bg-adicionar">
+                    <a href="{{ url_for('adicionar_receita') }}" class="adicionar">Adicionar receita</a>
                 </div>
-            </section>
-            {% endif %}
-            {% endwith %}
+                <table class="tabela">
+                    <tr>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                    {% for receita in receitas %}
+                    <tr>
+                        <td>{{ receita.valor }}</td>
+                        <td>{{ receita.descricao }}</td>
+                        <td>{{ receita.data }}</td>
+                        <td>
+                            <a href="{{ url_for('abrir_editar_receita', codigo=receita.codigo) }}">Editar</a>
+                            <a href="{{ url_for('excluir_receita', codigo=receita.codigo) }}">Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="mensagem-carteira">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <section>
+                    <div class="erro-menssagem d-flex center">
+                        {% for category, message in messages %}
+                        <div class="erro">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+                {% endwith %}
+            </div>
         </section>
     </main>
     <footer class="d-flex between">

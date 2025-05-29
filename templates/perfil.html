@@ -51,7 +51,7 @@
                         <td>{{ usuario.nome }}</td>
                         <td>{{ usuario.email }}</td>
                         <td>
-                            <a class="botao pequeno" href="{{ url_for('abrir_editar', codigo=usuario.codigo) }}">Editar</a>
+                            <a href="{{ url_for('abrir_editar', codigo=usuario.codigo) }}">Editar</a>
                         </td>
                     </tr>
                 </table>

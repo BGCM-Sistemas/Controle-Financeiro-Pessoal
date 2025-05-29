@@ -1,11 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial;
 }
 
-:root{
+:root {
     --azul-escuro: #143d57;
     --azul-claro: #3498db;
     --azul-medio: #1A5276;
@@ -16,7 +16,7 @@
     --transicao: all 0.3s ease;
 }
 
-.d-flex{
+.d-flex {
     display: flex;
 }
 
@@ -25,68 +25,68 @@
     align-items: center;
 }
 
-.evenly{
+.evenly {
     justify-content: space-evenly;
     align-items: center;
 }
 
-.around{
+.around {
     justify-content: space-around;
     align-items: center;
 }
 
-.container{
-    background-color: var(--azul-mais-claro);
-    /* background-image: linear-gradient(to top, var(--azul-medio), var(--azul-mais-claro), var(--azul-medio)); */
+.container {
+    /* background-color: var(--azul-mais-claro); */
+    background-image: linear-gradient(to top, var(--azul-medio), var(--azul-mais-claro), var(--azul-medio));
     padding: 10vh 0;
 }
 
-.center{
+.center {
     justify-content: center;
     align-items: center;
 }
 
-.column{
+.column {
     flex-direction: column;
 }
 
-header{
+header {
     padding: 20px;
     background-color: var(--azul-medio);
 }
 
-.logo{
+.logo {
     height: 100px;
     display: block;
 }
 
-header>div{
+header>div {
     width: 20%px;
     align-items: center;
 }
 
-.gestor{
+.gestor {
     text-align: center;
     color: var(--cinza-escuro);
 }
 
-.pessoal{
+.pessoal {
     text-align: center;
     font-size: 20px;
     color: var(--cinza-escuro);
 }
 
-.saudacao{
+.saudacao {
     background-color: var(--azul-medio);
     color: white;
     padding: 10px 10px 10px 3%;
 }
 
-nav{
+nav {
     width: 50%;
 }
 
-header nav a{
+header nav a {
     background-color: var(--cinza-claro);
     padding: 4px 50px;
     border-radius: 10px;
@@ -102,7 +102,7 @@ header nav a:hover {
     transition: var(--transicao);
 }
 
-.banner{
+.banner {
     background-image: url(../img/banner-img.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -111,16 +111,16 @@ header nav a:hover {
     height: 60vh;
 }
 
-.banner p{
+.banner p {
     width: 25%;
     font-size: 1.7em;
 }
 
-.banner p span{
+.banner p span {
     color: var(--laranja);
 }
 
-.banner div{
+.banner div {
     background-color: white;
     color: black;
     border-radius: 20px;
@@ -128,12 +128,12 @@ header nav a:hover {
     width: 25%;
 }
 
-.banner form label{
+.banner form label {
     display: block;
     font-size: 1.05em;
 }
 
-.banner form input{
+.banner form input {
     display: block;
     width: 100%;
     margin-bottom: 15px;
@@ -145,7 +145,7 @@ header nav a:hover {
     border: 2px solid var(--cinza-escuro);
 }
 
-.banner form button{
+.banner form button {
     width: 100%;
     background-color: var(--azul-claro);
     padding: 7px;
@@ -163,13 +163,13 @@ header nav a:hover {
     transition: var(--transicao);
 }
 
-.titulo{
+.titulo {
     text-align: center;
     padding: 20px 0;
     color: white;
 }
 
-.servico{
+.servico {
     width: 25%;
     box-shadow: 7px 7px 3px 4px var(--azul-escuro);
     background-color: var(--cinza-claro);
@@ -189,26 +189,26 @@ header nav a:hover {
     transition: var(--transicao);
 }
 
-.servico h3{
+.servico h3 {
     padding-bottom: 10px;
 }
 
-footer{
+footer {
     background-color: var(--azul-medio);
     color: white;
     padding: 0 20px 0 20px;
 }
 
-.redes img{
+.redes img {
     width: 75px;
     padding-left: 20px;
 }
 
-.footer-logo{
+.footer-logo {
     align-items: center;
 }
 
-.formulario{
+.formulario {
     background-color: white;
     width: 60%;
     margin: auto;
@@ -216,7 +216,7 @@ footer{
     padding: 20px;
 }
 
-.formulario input{
+.formulario input {
     width: 50%;
     display: block;
     margin: auto;
@@ -228,14 +228,14 @@ footer{
     background-color: var(--cinza-claro);
 }
 
-.formulario label{
+.formulario label {
     display: block;
     margin: auto;
     width: 50%;
     font-size: 1.05em;
 }
 
-.formulario button{
+.formulario button {
     width: 50%;
     background-color: var(--azul-claro);
     display: block;
@@ -254,18 +254,18 @@ footer{
     transition: var(--transicao);
 }
 
-.formulario p{
+.formulario p {
     padding-top: 10px;
     text-align: center;
 }
 
-.formulario p a{
+.formulario p a {
     text-decoration: none;
     color: var(--laranja);
     font-weight: bolder;
 }
 
-.erro{
+.erro {
     display: inline-block;
     background-color: var(--laranja);
     color: white;
@@ -276,13 +276,13 @@ footer{
     padding: 1em;
 }
 
-.bg-tabela{
+/* .bg-tabela{
     background-color: white;
     width: 60%;
     min-height: 20vh;
     border: 2px solid var(--cinza-escuro);
     border-radius: 10px;
-    margin: auto;
+    margin: 10px auto;
     padding: 20px 0;
 }
 
@@ -290,11 +290,17 @@ footer{
     background-color: white;
     width: 85%;
     border-collapse: collapse;
-    /* margin: auto; */
     text-align: center;
     box-shadow: 5px 5px 10px 1px var(--azul-mais-claro);
     color: white;
     font-weight: bold;
+    transition: var(--transicao);
+}
+
+.tabela:hover{
+    transform: translateY(-3px);
+    scale: 1.01;
+    transition: var(--transicao);
 }
 
 .tabela tr, .tabela td, .tabela th{
@@ -307,13 +313,80 @@ footer{
     color: white;
     font-weight: bolder;
     text-decoration: none;
+} */
+
+.bg-tabela {
+    background-color: white;
+    width: 60%;
+    min-height: 20vh;
+    border: 2px solid var(--cinza-escuro);
+    border-radius: 15px;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.container-perfil{
+.tabela {
+    background-color: white;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+    color: var(--azul-escuro);
+    font-weight: bold;
+    transition: var(--transicao);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabela:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: var(--transicao);
+}
+
+.tabela th {
+    background-color: var(--azul-escuro);
+    color: white;
+    padding: 15px;
+    letter-spacing: 1px;
+}
+
+.tabela td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: white;
+    transition: var(--transicao);
+}
+
+.tabela:hover td {
+    background-color: var(--azul-mais-claro);
+    color: white;
+}
+
+.tabela a {
+    color: var(--azul-escuro);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 1px solid var(--azul-escuro);
+}
+
+.tabela a:hover {
+    background-color: var(--laranja);
+    color: white;
+    transform: scale(1.05);
+}
+
+.container-perfil {
     min-height: calc(100vh - 290px);
 }
 
-.adicionar{
+.adicionar {
     background-color: var(--azul-claro);
     color: white;
     padding: 5px;
@@ -322,12 +395,66 @@ footer{
     transition: var(--transicao);
 }
 
-.adicionar:hover{
+.adicionar:hover {
     background-color: var(--laranja);
     transition: var(--transicao);
 }
 
-.bg-adicionar{
+.bg-adicionar {
     margin-bottom: 10px;
-    width: 85%;
+    width: 100%;
+}
+
+.valores-carteira {
+    background-color: white;
+    padding: 10px 20px;
+    border: 1px solid var(--azul-escuro);
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    height: 30vh;
+    box-shadow: 3px 3px 20px var(--azul-escuro);
+}
+
+.valores-carteira a{
+    text-decoration: none;
+    margin-top: 20px;
+    color: white;
+    background-color: var(--azul-claro);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: var(--transicao);
+}
+
+.valores-carteira a:hover{
+    background-color: var(--laranja);
+    transform: translateY(-3px);
+    scale: 1.01;
+    transition: var(--transicao);
+}
+
+.carteira{
+    width: 100%;
+}
+
+.receitas {
+    color: rgb(0, 228, 0);
+}
+
+.despesas {
+    color: rgb(228, 0, 0);
+}
+
+.negativo {
+    color: red;
+}
+
+.positivo {
+    color: rgb(0, 228, 0);
+}
+
+.mensagem-carteira {
+    width: 100%;
 }

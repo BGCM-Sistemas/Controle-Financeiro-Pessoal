@@ -26,51 +26,41 @@
     </header>
     <main>
         <section class="container d-flex center column">
-            <div class="bg-tabela d-flex center column">
-                <div class="bg-adicionar">
-                    <a href="{{ url_for('adicionar_receita') }}" class="adicionar">Adicionar receita</a>
+            <div class="carteira d-flex evenly">
+                <div class="receitas valores-carteira d-flex center column">
+                    <h2>Total receitas:</h2>
+                    <p>R$ {{ "%.2f"|format(receita_total) }}</p>
+                    <a href="{{ url_for('lista_receitas') }}">Lista de receitas</a>
                 </div>
-                <table class="tabela">
-                    <tr>
-                        <th>Valor</th>
-                        <th>Descrição</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                    {% for receita in receitas %}
-                        <tr>
-                            <td>{{ receita.valor }}</td>
-                            <td>{{ receita.descricao }}</td>
-                            <td>{{ receita.data }}</td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                <div class="despesas valores-carteira d-flex center column">
+                    <h2>Total despesas:</h2>
+                    <p>R$ {{ "%.2f"|format(despesa_total) }}</p>
+                    <a href="{{ url_for('lista_despesas') }}">Lista de despesas</a>
+                </div>
+                {% if saldo >= 0 %}
+                    <div class="saldo valores-carteira d-flex center column positivo">
+                        <h2>Saldo:</h2>
+                        <p>R$ {{ "%.2f"|format(saldo) }}</p>
+                    </div>
+                {% else %}
+                    <div class="saldo valores-carteira d-flex center column negativo">
+                        <h2>Saldo:</h2>
+                        <p>R$ {{ "%.2f"|format(saldo) }}</p>
+                    </div>
+                {% endif %}
             </div>
-            <div class="bg-tabela d-flex center column">
-                <div class="bg-adicionar">
-                    <a href="{{ url_for('adicionar_despesa') }}" class="adicionar">Adicionar despesa</a>
-                </div>
-                <table class="tabela">
-                    <tr>
-                        <th>Valor</th>
-                        <th>Descrição</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                    {% for despesa in despesas %}
-                        <tr>
-                            <td>{{ despesa.valor }}</td>
-                            <td>{{ despesa.descricao }}</td>
-                            <td>{{ despesa.data }}</td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+            <div class="mensagem-carteira">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <section>
+                    <div class="erro-menssagem d-flex center">
+                        {% for category, message in messages %}
+                        <div class="erro">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+                {% endwith %}
             </div>
         </section>
     </main>

@@ -26,15 +26,14 @@
     </header>
     <main>
         <section class="container">
-            <form action="adicionar_despesa" class="formulario" method="POST">
+            <form action="{{ url_for('editar_receita', codigo=receita.codigo) }}" class="formulario" method="POST">
                 <label for="valor">Valor</label>
-                <input type="number" name="valor" id="valor" placeholder="Insira o valor da despesa" required>
+                <input type="number" name="valor" id="valor" value="{{ receita.valor }}" placeholder="Insira o valor da receita" required>
                 <label for="descricao">Descrição</label>
-                <input type="text" name="descricao" id="descricao"
-                    placeholder="Insira a descrição da despesa ex.: Compras" required>
+                <input type="text" name="descricao" id="descricao" value="{{ receita.descricao }}" placeholder="Insira a descrição da receita ex.: Salário" required>
                 <label for="data">Data</label>
-                <input type="date" name="data" id="data" required>
-                <button type="submit">Adicionar despesa</button>
+                <input type="date" name="data" id="data" value="{{ receita.data }}" required>
+                <button type="submit">Editar receita</button>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -59,9 +58,9 @@
                 </div>
             </div>
             <div class="redes">
-                <img src="static/img/instagram-logo-img.png" alt="" class="footer-icon">
-                <img src="static/img/facebook-logo-img.png" alt="Logo facebook" class="footer-icon">
-                <img src="static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
+                <img src="../static/img/instagram-logo-img.png" alt="" class="footer-icon">
+                <img src="../static/img/facebook-logo-img.png" alt="Logo facebook" class="footer-icon">
+                <img src="../static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
             </div>
         </div>
         <div>
