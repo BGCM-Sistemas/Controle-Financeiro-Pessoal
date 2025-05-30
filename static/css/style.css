@@ -41,6 +41,10 @@
     padding: 10vh 0;
 }
 
+.container-erro-menssagem {
+    background-color: var(--azul-medio);
+}
+
 .center {
     justify-content: center;
     align-items: center;
@@ -50,7 +54,7 @@
     flex-direction: column;
 }
 
-.btn{
+.btn {
     background-color: var(--azul-claro);
     color: white;
     padding: 7px;
@@ -59,12 +63,12 @@
     transition: var(--transicao);
 }
 
-.btn:hover{
+.btn:hover {
     background-color: var(--laranja);
     transition: var(--transicao);
 }
 
-.f_altura{
+.f_altura {
     min-height: calc(100vh - 290px);
     /* min-height: 100vh; */
 }
@@ -122,7 +126,7 @@ header nav a:hover {
 }
 
 .banner {
-    background-image: url(../img/banner-img.png);
+    background-image: url(../img/banner-img2.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -256,6 +260,23 @@ footer {
     font-size: 1.05em;
 }
 
+.voltar {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: 1px solid var(--azul-claro);
+}
+
+.voltar:hover {
+    border: none;
+    color: white;
+}
+
 .formulario p {
     padding-top: 10px;
     text-align: center;
@@ -360,17 +381,17 @@ footer {
     box-shadow: 3px 3px 20px var(--azul-escuro);
 }
 
-.valores-carteira a{
+.valores-carteira a {
     margin-top: 20px;
     padding: 10px 20px;
 }
 
-.valores-carteira a:hover{
+.valores-carteira a:hover {
     transform: translateY(-3px);
     scale: 1.01;
 }
 
-.carteira{
+.carteira {
     width: 100%;
 }
 

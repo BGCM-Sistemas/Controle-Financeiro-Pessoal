@@ -26,14 +26,13 @@ def nome_usuario_logado():
 def index():
     # aparecer o nome na home
     nome = nome_usuario_logado()
-    if len(usuarios) > 0:
-        for usuario in usuarios:
-            nome = usuario["nome"]
-    return render_template('index.html', nome=nome)
+    usuario = usuario_logado()
+    return render_template('index.html', nome=nome, usuario=usuario)
 
 # rota de cadastro
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    usuario = usuario_logado()
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
@@ -100,14 +99,13 @@ def cadastro():
         flash('Cadastro realizado com sucesso')
         return redirect(url_for('login'))
 
-    else:
-        return render_template('cadastro.html')
+    return render_template('cadastro.html', usuario=usuario)
 
 
 # rota de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    
+    usuario = usuario_logado()
     if request.method == 'POST':
         email = request.form['email']
         senha = request.form['senha']
@@ -119,11 +117,12 @@ def login():
                     flash("Login realizado com sucesso")
                     return render_template('perfil.html', usuario=usuario)
 
-                flash("Email ou senha inválidos")
-                return render_template('login.html')
+        flash("Email ou senha inválidos")
+    return render_template('login.html', usuario=usuario)
+    
 
 
-    return render_template('login.html')
+    return render_template('login.html', usuario=usuario)
 
 # rota logout
 @app.route('/logout')
@@ -132,21 +131,22 @@ def logout():
     if usuario:
         usuario['logado'] = 0
         flash('Usuário deslogado com sucesso')
-    return redirect(url_for('index'))
-    
-    return redirect('/')
+
+        return redirect(url_for('index'))
+    return redirect('index')
 
 # rota de perfil
 @app.route('/perfil')
 def perfil():
     # aparecer o nome na home
+    usuario = usuario_logado()
     nome = nome_usuario_logado()
     for usuario in usuarios:
         if usuario['logado'] == 1:
             nome = usuario['nome']
             email = usuario['email']
             return render_template('perfil.html', nome=nome, email=email, usuario=usuario)
-    return render_template('login.html')
+    return redirect('login')
 
 # rota para abrir a edição
 @app.route('/abrir_editar/<codigo>')
@@ -158,66 +158,60 @@ def abrir_editar(codigo):
 # rota de editar
 @app.route('/editar/<codigo>', methods=['GET', 'POST'])
 def editar(codigo):
+    usuario = usuario_logado()
     if request.method == 'POST':
+        usuario['nome'] = request.form['nome']
+        usuario['email'] = request.form['email']
+        usuario['senha'] = request.form['senha']
+        senha = usuario['senha']
+        email = usuario['email']
+        # senha forte
+        tem_maiuscula = False
+        tem_minuscula = False
+        tem_numero = False
+        tem_especial = False
+
+
+        for c in senha:
+            if c.isupper(): # se tem maiuscula
+                tem_maiuscula = True
+            elif c.islower(): #se tem minuscula
+                tem_minuscula = True
+            elif c.isdigit(): #se tem numero
+                tem_numero = True
+            elif not c.isalnum(): #se tem caracter especial
+                tem_especial = True
+        
+        if not tem_maiuscula:
+            flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
+            return render_template('editar.html', usuario=usuario)
+
+        elif not tem_minuscula:
+            flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
+            return render_template('editar.html', usuario=usuario)
+
+        elif not tem_numero:
+            flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
+            return render_template('editar.html', usuario=usuario)
+
+        elif not tem_especial:
+            flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
+            return render_template('editar.html', usuario=usuario)
+
+        elif len(usuario['senha']) < 8:
+            flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
+            return render_template('editar.html', usuario=usuario)
+
+        elif not usuario['nome']:
+            flash('Nome obrigatório')
+            return render_template('editar.html', usuario=usuario)
+
+        # Verificar se email já existe
         for usuario in usuarios:
-            if usuario['codigo'] == codigo:
-                if usuario['logado'] == 1:
-                    usuario['nome'] = request.form['nome']
-                    usuario['email'] = request.form['email']
-                    usuario['senha'] = request.form['senha']
-                    senha = usuario['senha']
-                    # senha forte
-                    tem_maiuscula = False
-                    tem_minuscula = False
-                    tem_numero = False
-                    tem_especial = False
-
-                    print(senha)
-
-                    for c in senha:
-                        if c.isupper(): # se tem maiuscula
-                            tem_maiuscula = True
-                        elif c.islower(): #se tem minuscula
-                            tem_minuscula = True
-                        elif c.isdigit(): #se tem numero
-                            tem_numero = True
-                        elif not c.isalnum(): #se tem caracter especial
-                            tem_especial = True
-
-                    # if not (tem_maiuscula or tem_minuscula or tem_numero or tem_especial):
-                    #     flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
-                    #     return render_template('editar.html', usuario=usuario)
-                    
-                    if not tem_maiuscula:
-                        flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
-                        return render_template('editar.html', usuario=usuario)
-
-                    elif not tem_minuscula:
-                        flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
-                        return render_template('editar.html', usuario=usuario)
-
-                    elif not tem_numero:
-                        flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
-                        return render_template('editar.html', usuario=usuario)
-
-                    elif not tem_especial:
-                        flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
-                        return render_template('editar.html', usuario=usuario)
-
-                    elif len(usuario['senha']) < 8:
-                        flash('A senha deve ter pelo menos 8 dígitos, uma maiúscula, uma minúscula, um número e um caractere especial')
-                        return render_template('editar.html', usuario=usuario)
-
-                    elif not usuario['nome']:
-                        flash('Nome obrigatório')
-                        return render_template('editar.html')
-                else:
-                    flash('Usuário não logado')
-                    return redirect('login')
-            else:
-                flash('Usuário não encontrado')
-                return redirect('login')
-
+            if usuario['email'] == email:
+                flash("Este email já está cadastrado por outro usuário")
+                return render_template('editar.html', usuario=usuario)
+        
         return redirect(url_for('perfil'))
 
     return render_template('editar.html')
@@ -238,11 +232,11 @@ def carteira():
             saldo = 0
             receita_total = 0
             despesa_total = 0
-
+# validação da receita
             for receita in usuario['receitas']:
                 saldo += float(receita['valor'])
                 receita_total += float(receita['valor'])
-
+# validação da despesa
             for despesa in usuario['despesas']:
                 saldo -= float(despesa['valor'])
                 despesa_total -= float(despesa['valor'])
@@ -252,17 +246,17 @@ def carteira():
 
 @app.route('/lista_receitas')
 def lista_receitas():
-    for usuario in usuarios:
-        if usuario['logado'] == 1:
-            receitas = usuario['receitas']
+    usuario = usuario_logado()
+    if usuario:
+        receitas=usuario['receitas']
     return render_template('lista_receitas.html', receitas=receitas)
 
 
 @app.route('/lista_despesas')
 def lista_despesas():
-    for usuario in usuarios:
-        if usuario['logado'] == 1:
-            despesas = usuario['despesas']
+    usuario = usuario_logado()
+    if usuario:
+        despesas = usuario['despesas']
     return render_template('lista_despesas.html', despesas=despesas)
 
 # rota adicionar receita
@@ -284,6 +278,7 @@ def adicionar_receita():
         codigo = str(len(usuario['receitas']) +1)
         data_pre_formatada = datetime.strptime(data_nf, '%Y-%m-%d')  # Converte string para datetime
         data_formatada = data_pre_formatada.strftime('%d/%m/%Y')
+
         receita = {
             'valor': valor,
             'descricao': descricao,

@@ -20,7 +20,11 @@
         <nav class="d-flex between">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('carteira') }}">Carteira</a>
+            {% if usuario == None %}
             <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
             <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
@@ -34,6 +38,7 @@
                 <label for="data">Data</label>
                 <input type="date" name="data" id="data" value="{{ despesa.data_nf }}" required>
                 <button type="submit" class="btn">Editar despesa</button>
+                <a href="{{ url_for('index') }}" class="btn voltar">Voltar</a>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -58,9 +63,9 @@
                 </div>
             </div>
             <div class="redes">
-                <img src="static/img/instagram-logo-img.png" alt="" class="footer-icon">
-                <img src="static/img/facebook-logo-img.png" alt="Logo facebook" class="footer-icon">
-                <img src="static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
+                <img src="../static/img/instagram-logo-img.png" alt="" class="footer-icon">
+                <img src="../static/img/facebook-logo-img.png" alt="Logo facebook" class="footer-icon">
+                <img src="../static/img/whatsapp-logo-img.png" alt="Logo whatsapp" class="footer-icon">
             </div>
         </div>
         <div>

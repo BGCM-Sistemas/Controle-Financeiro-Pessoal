@@ -18,7 +18,11 @@
         <nav class="d-flex between">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('carteira') }}">Carteira</a>
+            {% if usuario == None %}
             <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
             <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
@@ -30,6 +34,7 @@
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha" placeholder="Informe sua senha" required>
                 <button type="submit" class="btn">Logar</button>
+                <a href="{{ url_for('index') }}" class="btn voltar">Voltar</a>
                 <p>Não tem uma conta ainda? Não perca seu dinheiro e <a href="{{ url_for('cadastro') }}">cadastre</a></p>
             </form>
             

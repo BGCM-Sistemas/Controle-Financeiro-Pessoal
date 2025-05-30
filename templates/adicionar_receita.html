@@ -20,7 +20,11 @@
         <nav class="d-flex between">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('carteira') }}">Carteira</a>
+            {% if usuario == None %}
             <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
             <a href="{{ url_for('perfil') }}">Perfil</a>
         </nav>
     </header>
@@ -32,8 +36,9 @@
                 <label for="descricao">Descrição</label>
                 <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição da receita ex.: Salário" required>
                 <label for="data">Data</label>
-                <input type="date" name="data" id="data" required>
+                <input type="date" name="data" id="data" min="2025-01-01" max="9999-12-31 "required>
                 <button type="submit" class="btn">Adicionar receita</button>
+                <a href="{{ url_for('lista_receitas') }}" class="btn voltar">Voltar</a>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
