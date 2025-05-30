@@ -23,13 +23,13 @@
         </nav>
     </header>
     <main>
-        <section class="container">
+        <section class="container f_altura">
             <form action="login" class="formulario" method="POST">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="Informe seu email" required>
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha" placeholder="Informe sua senha" required>
-                <button type="submit">Logar</button>
+                <button type="submit" class="btn">Logar</button>
                 <p>Não tem uma conta ainda? Não perca seu dinheiro e <a href="{{ url_for('cadastro') }}">cadastre</a></p>
             </form>
             

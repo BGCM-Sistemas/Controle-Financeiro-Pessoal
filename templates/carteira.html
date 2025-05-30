@@ -25,17 +25,21 @@
         </nav>
     </header>
     <main>
-        <section class="container d-flex center column">
+        {% if nome %}
+            <h1 class="saudacao">Olá, {{ nome }}</h1>
+        {% endif %}
+
+        <section class="container d-flex center column f_altura">
             <div class="carteira d-flex evenly">
                 <div class="receitas valores-carteira d-flex center column">
                     <h2>Total receitas:</h2>
                     <p>R$ {{ "%.2f"|format(receita_total) }}</p>
-                    <a href="{{ url_for('lista_receitas') }}">Lista de receitas</a>
+                    <a href="{{ url_for('lista_receitas') }}" class="btn">Lista de receitas</a>
                 </div>
                 <div class="despesas valores-carteira d-flex center column">
                     <h2>Total despesas:</h2>
                     <p>R$ {{ "%.2f"|format(despesa_total) }}</p>
-                    <a href="{{ url_for('lista_despesas') }}">Lista de despesas</a>
+                    <a href="{{ url_for('lista_despesas') }}" class="btn">Lista de despesas</a>
                 </div>
                 {% if saldo >= 0 %}
                     <div class="saldo valores-carteira d-flex center column positivo">

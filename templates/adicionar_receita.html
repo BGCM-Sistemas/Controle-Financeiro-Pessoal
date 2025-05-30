@@ -28,12 +28,12 @@
         <section class="container">
             <form action="adicionar_receita" class="formulario" method="POST">
                 <label for="valor">Valor</label>
-                <input type="number" name="valor" id="valor" placeholder="Insira o valor da receita" required>
+                <input type="number" name="valor" id="valor" placeholder="Insira o valor da receita" required step="any">
                 <label for="descricao">Descrição</label>
                 <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição da receita ex.: Salário" required>
                 <label for="data">Data</label>
                 <input type="date" name="data" id="data" required>
-                <button type="submit">Adicionar receita</button>
+                <button type="submit" class="btn">Adicionar receita</button>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

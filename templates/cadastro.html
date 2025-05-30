@@ -23,6 +23,8 @@
         </nav>
     </header>
     <main>
+        
+
         <section class="container">
             <form action="cadastro" class="formulario" method="POST">
                 <label for="nome">Nome</label>
@@ -31,7 +33,7 @@
                 <input type="email" name="email" id="email" placeholder="Insira seu email" required>
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha" placeholder="Insira uma senha com até 8 digitos" required>
-                <button type="submit">Cadastrar</button>
+                <button type="submit" class="btn">Cadastrar</button>
                 <p>Já possui uma conta? O que está esperando? Faça <a href="{{ url_for('login') }}">login</a></p>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}

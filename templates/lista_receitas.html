@@ -25,10 +25,11 @@
         </nav>
     </header>
     <main>
-        <section class="container d-flex center column">
+        <section class="container d-flex center column f_altura">
             <div class="bg-tabela d-flex center column">
                 <div class="bg-adicionar">
-                    <a href="{{ url_for('adicionar_receita') }}" class="adicionar">Adicionar receita</a>
+                    <a href="{{ url_for('adicionar_receita') }}" class="btn">Adicionar receita</a>
+                    <a href="{{ url_for('carteira') }}" class="btn">Voltar para a carteira</a>
                 </div>
                 <table class="tabela">
                     <tr>
@@ -39,12 +40,12 @@
                     </tr>
                     {% for receita in receitas %}
                     <tr>
-                        <td>{{ receita.valor }}</td>
+                        <td>R$ {{ "%.2f"|format(receita.valor) }}</td>
                         <td>{{ receita.descricao }}</td>
                         <td>{{ receita.data }}</td>
                         <td>
-                            <a href="{{ url_for('abrir_editar_receita', codigo=receita.codigo) }}">Editar</a>
-                            <a href="{{ url_for('excluir_receita', codigo=receita.codigo) }}">Excluir</a>
+                            <a href="{{ url_for('abrir_editar_receita', codigo=receita.codigo) }}" class="btn">Editar</a>
+                            <a href="{{ url_for('excluir_receita', codigo=receita.codigo) }}" class="btn">Excluir</a>
                         </td>
                     </tr>
                     {% endfor %}

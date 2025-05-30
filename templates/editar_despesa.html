@@ -34,8 +34,8 @@
                 <input type="text" name="descricao" id="descricao" value="{{ despesa.descricao }}"
                     placeholder="Insira a descrição da despesa ex.: Mercado" required>
                 <label for="data">Data</label>
-                <input type="date" name="data" id="data" value="{{ despesa.data }}" required>
-                <button type="submit">Editar despesa</button>
+                <input type="date" name="data" id="data" value="{{ despesa.data_nf }}" required>
+                <button type="submit" class="btn">Editar despesa</button>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

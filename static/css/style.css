@@ -50,6 +50,25 @@
     flex-direction: column;
 }
 
+.btn{
+    background-color: var(--azul-claro);
+    color: white;
+    padding: 7px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+.btn:hover{
+    background-color: var(--laranja);
+    transition: var(--transicao);
+}
+
+.f_altura{
+    min-height: calc(100vh - 290px);
+    /* min-height: 100vh; */
+}
+
 header {
     padding: 20px;
     background-color: var(--azul-medio);
@@ -147,20 +166,13 @@ header nav a:hover {
 
 .banner form button {
     width: 100%;
-    background-color: var(--azul-claro);
     padding: 7px;
     border: none;
-    border-radius: 10px;
     font-size: 1.05em;
-    transition: var(--transicao);
-    color: white;
 }
 
 .banner form button:hover {
-    background-color: var(--laranja);
-    color: white;
     transform: translateY(-2px);
-    transition: var(--transicao);
 }
 
 .titulo {
@@ -237,21 +249,11 @@ footer {
 
 .formulario button {
     width: 50%;
-    background-color: var(--azul-claro);
     display: block;
     margin: auto;
     border: none;
     padding: 10px;
     font-size: 1.05em;
-    border-radius: 10px;
-    transition: var(--transicao);
-    color: white;
-}
-
-.formulario button:hover {
-    background-color: var(--laranja);
-    color: white;
-    transition: var(--transicao);
 }
 
 .formulario p {
@@ -275,45 +277,6 @@ footer {
     border-radius: 10px;
     padding: 1em;
 }
-
-/* .bg-tabela{
-    background-color: white;
-    width: 60%;
-    min-height: 20vh;
-    border: 2px solid var(--cinza-escuro);
-    border-radius: 10px;
-    margin: 10px auto;
-    padding: 20px 0;
-}
-
-.tabela{
-    background-color: white;
-    width: 85%;
-    border-collapse: collapse;
-    text-align: center;
-    box-shadow: 5px 5px 10px 1px var(--azul-mais-claro);
-    color: white;
-    font-weight: bold;
-    transition: var(--transicao);
-}
-
-.tabela:hover{
-    transform: translateY(-3px);
-    scale: 1.01;
-    transition: var(--transicao);
-}
-
-.tabela tr, .tabela td, .tabela th{
-    border: 1px solid black;
-    padding: 10px;
-    background-color: var(--azul-mais-claro);
-}
-
-.tabela a{
-    color: white;
-    font-weight: bolder;
-    text-decoration: none;
-} */
 
 .bg-tabela {
     background-color: white;
@@ -365,39 +328,18 @@ footer {
 }
 
 .tabela a {
-    color: var(--azul-escuro);
     font-weight: bold;
-    text-decoration: none;
     padding: 8px 15px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s ease;
     display: inline-block;
-    border: 1px solid var(--azul-escuro);
 }
 
 .tabela a:hover {
-    background-color: var(--laranja);
     color: white;
-    transform: scale(1.05);
 }
 
 .container-perfil {
     min-height: calc(100vh - 290px);
-}
-
-.adicionar {
-    background-color: var(--azul-claro);
-    color: white;
-    padding: 5px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: var(--transicao);
-}
-
-.adicionar:hover {
-    background-color: var(--laranja);
-    transition: var(--transicao);
 }
 
 .bg-adicionar {
@@ -419,20 +361,13 @@ footer {
 }
 
 .valores-carteira a{
-    text-decoration: none;
     margin-top: 20px;
-    color: white;
-    background-color: var(--azul-claro);
     padding: 10px 20px;
-    border-radius: 10px;
-    transition: var(--transicao);
 }
 
 .valores-carteira a:hover{
-    background-color: var(--laranja);
     transform: translateY(-3px);
     scale: 1.01;
-    transition: var(--transicao);
 }
 
 .carteira{

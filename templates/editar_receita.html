@@ -32,8 +32,8 @@
                 <label for="descricao">Descrição</label>
                 <input type="text" name="descricao" id="descricao" value="{{ receita.descricao }}" placeholder="Insira a descrição da receita ex.: Salário" required>
                 <label for="data">Data</label>
-                <input type="date" name="data" id="data" value="{{ receita.data }}" required>
-                <button type="submit">Editar receita</button>
+                <input type="date" name="data" id="data" value="{{ receita.data_nf }}" required>
+                <button type="submit" class="btn">Editar receita</button>
             </form>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
