@@ -27,7 +27,20 @@
             <h1 class="saudacao">Olá, {{ nome }}</h1>
         {% endif %}
 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <section class="container">
+            <div class="erro-menssagem d-flex center">
+                {% for category, message in messages %}
+                <div class="erro">{{ message }}</div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% endwith %}
+
         <section class="banner d-flex around container">
+            
             <p>Entenda seus gastos com a <span>Gestor Pessoal</span> e saiba reservar seu dinheiro conosco</p>
             <div>
                 <form action="calculo-reserva">

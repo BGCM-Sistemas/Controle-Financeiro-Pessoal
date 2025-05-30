@@ -4,14 +4,28 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = 'senhasupersecretacomçparahackeramericanoerussonaoconseguirinvadir'
 usuarios = []
-receitas = []
-despesas = []
+
+# função para verificar qual usuário está logado
+def usuario_logado():
+    for usuario in usuarios:
+        if usuario['logado'] == 1:
+            return usuario
+    return None
+
+# função de pegar o nome do usuário logado
+def nome_usuario_logado():
+    usuario = usuario_logado()
+    if usuario != None:
+        nome = usuario['nome']
+        return nome
+    return None
+
 
 # rota da home
 @app.route('/')
 def index():
     # aparecer o nome na home
-    nome = ''
+    nome = nome_usuario_logado()
     if len(usuarios) > 0:
         for usuario in usuarios:
             nome = usuario["nome"]
@@ -78,7 +92,9 @@ def cadastro():
             "email": email,
             "senha": senha,
             "codigo": codigo,
-            "logado": 0 #nao loguei
+            "logado": 0, #nao loguei
+            "receitas": [],
+            "despesas": []
         }
         usuarios.append(usuario)
         flash('Cadastro realizado com sucesso')
@@ -109,14 +125,22 @@ def login():
 
     return render_template('login.html')
 
+# rota logout
+@app.route('/logout')
+def logout():
+    usuario = usuario_logado()
+    if usuario:
+        usuario['logado'] = 0
+        flash('Usuário deslogado com sucesso')
+    return redirect(url_for('index'))
+    
+    return redirect('/')
+
 # rota de perfil
 @app.route('/perfil')
 def perfil():
     # aparecer o nome na home
-    nome = ''
-    if len(usuarios) > 0:
-        for usuario in usuarios:
-            nome = usuario["nome"]
+    nome = nome_usuario_logado()
     for usuario in usuarios:
         if usuario['logado'] == 1:
             nome = usuario['nome']
@@ -202,23 +226,24 @@ def editar(codigo):
 @app.route('/carteira')
 def carteira():
     # aparecer o nome na home
-    nome = ''
-    if len(usuarios) > 0:
-        for usuario in usuarios:
-            nome = usuario["nome"]
+    nome = nome_usuario_logado()
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
     for usuario in usuarios:
         if usuario['logado'] == 1:
             nome = usuario['nome']
             email = usuario['email']
+
             saldo = 0
             receita_total = 0
             despesa_total = 0
 
-            for receita in receitas:
+            for receita in usuario['receitas']:
                 saldo += float(receita['valor'])
                 receita_total += float(receita['valor'])
 
-            for despesa in despesas:
+            for despesa in usuario['despesas']:
                 saldo -= float(despesa['valor'])
                 despesa_total -= float(despesa['valor'])
             return render_template('carteira.html', receita_total=receita_total, despesa_total=despesa_total, saldo=saldo, nome=nome)
@@ -227,16 +252,26 @@ def carteira():
 
 @app.route('/lista_receitas')
 def lista_receitas():
+    for usuario in usuarios:
+        if usuario['logado'] == 1:
+            receitas = usuario['receitas']
     return render_template('lista_receitas.html', receitas=receitas)
 
 
 @app.route('/lista_despesas')
 def lista_despesas():
+    for usuario in usuarios:
+        if usuario['logado'] == 1:
+            despesas = usuario['despesas']
     return render_template('lista_despesas.html', despesas=despesas)
 
 # rota adicionar receita
 @app.route('/adicionar_receita', methods=['GET', 'POST'])
 def adicionar_receita():
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         valor = float(request.form['valor'])
         
@@ -246,7 +281,7 @@ def adicionar_receita():
 
         descricao = request.form['descricao']
         data_nf = request.form['data']
-        codigo = str(len(receitas) +1)
+        codigo = str(len(usuario['receitas']) +1)
         data_pre_formatada = datetime.strptime(data_nf, '%Y-%m-%d')  # Converte string para datetime
         data_formatada = data_pre_formatada.strftime('%d/%m/%Y')
         receita = {
@@ -256,7 +291,7 @@ def adicionar_receita():
             'data_nf': data_nf,
             'codigo': codigo
         }
-        receitas.append(receita)
+        usuario['receitas'].append(receita)
         flash('Receita cadastrada com sucesso')
         return redirect('/lista_receitas')
     return render_template('adicionar_receita.html')
@@ -266,6 +301,10 @@ def adicionar_receita():
 # rota adicionar despesa
 @app.route('/adicionar_despesa', methods=['GET', 'POST'])
 def adicionar_despesa():
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         valor = float(request.form['valor'])
 
@@ -275,7 +314,7 @@ def adicionar_despesa():
 
         descricao = request.form['descricao']
         data_nf = request.form['data']
-        codigo = str(len(despesas) +1)
+        codigo = str(len(usuario['despesas']) +1)
         data_pre_formatada = datetime.strptime(data_nf, '%Y-%m-%d')  # Converte string para datetime
         data_formatada = data_pre_formatada.strftime('%d/%m/%Y')
         despesa = {
@@ -285,7 +324,7 @@ def adicionar_despesa():
             'data_nf': data_nf,
             'codigo': codigo
         }
-        despesas.append(despesa)
+        usuario['despesas'].append(despesa)
         flash('Despesa cadastrada com sucesso')
         return redirect('/lista_despesas')
     return render_template('adicionar_despesa.html')
@@ -293,15 +332,21 @@ def adicionar_despesa():
 # abrir a página de editar receita
 @app.route('/abrir_editar_receita/<codigo>')
 def abrir_editar_receita(codigo):
-    for receita in receitas:
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
+    for receita in usuario['receitas']:
         if receita['codigo'] == codigo:
             return render_template('editar_receita.html', receita=receita)
 
 # editar receita
 @app.route('/editar_receita/<codigo>', methods=['GET', 'POST'])
 def editar_receita(codigo):
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
     if request.method == 'POST':
-        for receita in receitas:
+        for receita in usuario['receitas']:
             if receita['codigo'] == codigo:
                 valor = float(request.form['valor'])
 
@@ -323,15 +368,21 @@ def editar_receita(codigo):
 # abrir editar despesa
 @app.route('/abrir_editar_despesa/<codigo>')
 def abrir_editar_despesa(codigo):
-    for despesa in despesas:
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
+    for despesa in usuario['despesas']:
         if despesa['codigo'] == codigo:
             return render_template('editar_despesa.html', despesa=despesa)
 
 # editar despesa
 @app.route('/editar_despesa/<codigo>', methods=['GET', 'POST'])
 def editar_despesa(codigo):
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
     if request.method == 'POST':
-        for despesa in despesas:
+        for despesa in usuario['despesas']:
             if despesa['codigo'] == codigo:
                 valor = float(request.form['valor'])
 
@@ -354,9 +405,12 @@ def editar_despesa(codigo):
 # rota excluir receita
 @app.route('/excluir_receita/<codigo>')
 def excluir_receita(codigo):
-    for i, receita in enumerate(receitas):
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
+    for i, receita in enumerate(usuario['receitas']):
         if receita['codigo'] == codigo:
-            del receitas[i]
+            del usuario['receitas'][i]
             flash('Receita excluída com sucesso!')
             break
     return redirect(url_for('lista_receitas'))
@@ -365,9 +419,12 @@ def excluir_receita(codigo):
 # rota excluir despesa
 @app.route('/excluir_despesa/<codigo>')
 def excluir_despesa(codigo):
-    for i, despesa in enumerate(despesas):
+    usuario = usuario_logado()
+    if not usuario:
+        return redirect(url_for('login'))
+    for i, despesa in enumerate(usuario['despesas']):
         if despesa['codigo'] == codigo:
-            del despesas[i]
+            del usuario['despesas'][i]
             flash('Despesa excluída com sucesso!')
             break
     return redirect(url_for('lista_despesas'))

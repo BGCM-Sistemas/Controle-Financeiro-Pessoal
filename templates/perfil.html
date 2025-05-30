@@ -40,7 +40,10 @@
             </section>
             {% endif %}
             {% endwith %}
-            <div class="bg-tabela d-flex center">
+            <div class="bg-tabela d-flex center column">
+                <div class="bg-adicionar">
+                    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+                </div>
                 <table class="tabela">
                     <tr>
                         <th>Nome</th>

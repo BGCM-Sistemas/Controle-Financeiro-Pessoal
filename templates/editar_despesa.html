@@ -28,11 +28,9 @@
         <section class="container">
             <form action="{{ url_for('editar_despesa', codigo=despesa.codigo) }}" class="formulario" method="POST">
                 <label for="valor">Valor</label>
-                <input type="number" name="valor" id="valor" value="{{ despesa.valor }}"
-                    placeholder="Insira o valor da despesa" required>
+                <input type="number" name="valor" id="valor" value="{{ despesa.valor }}" placeholder="Insira o valor da despesa" step="any" required>
                 <label for="descricao">Descrição</label>
-                <input type="text" name="descricao" id="descricao" value="{{ despesa.descricao }}"
-                    placeholder="Insira a descrição da despesa ex.: Mercado" required>
+                <input type="text" name="descricao" id="descricao" value="{{ despesa.descricao }}" placeholder="Insira a descrição da despesa ex.: Mercado" required>
                 <label for="data">Data</label>
                 <input type="date" name="data" id="data" value="{{ despesa.data_nf }}" required>
                 <button type="submit" class="btn">Editar despesa</button>
